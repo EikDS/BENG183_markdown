@@ -12,7 +12,9 @@
     - [Sequencing](#sequencing)
 - [Experimental Considerations](#experimental-considerations)
     - [Prepare Samples](#prepare-samples)
-    - [Prepare Sequencing](#prepare-sequencing)
+    - [Sequencing](#sequencing)
+        - [Coverage and What Coverage Should be Used](#coverage-and-what-coverage-should-be-used)
+        - [Library Preparation](#library-preparation)
 - [Data Analysis](#data-analysis)
     - [Normalization](#normalization)
     - [Mapping](#mapping)
@@ -60,4 +62,37 @@ An illustration of the similarities and difference between the different Next Ge
 </p>
 
 ## Experimental Considerations
+
+### Prepare Samples
+Harvesting cells. There is a noticeable increase in the size of the cell pellet in time courses lasting 4 hr or longer. To compensate for this, smaller samples are taken at later time points and diluted with YEP-lactate to bring the volume up to 45 ml, based on OD600 measurements.
+
+Optimizing ChIP. There are several variables in the ChIP protocol that may be optimized including the degree of crosslinking, cell lysis and sonication of DNA. The degree of crosslinking can be varied by changing the incubation time with formaldehyde. Cell lysis should also be optimized since it is dependent on the vortexer. Intact cells can be counted under a microscope using a hemacytometer. Sonication conditions also should be adjusted such that the DNA size average is about 150
+bp since we want DNAs from every chomatin. The quality and effectiveness of the antibody should also be checked by
+examining the Non-IP and Post-IP samples on Western blots. The optimal antibody dosage should also be determined.
+
+### Sequencing
+#### Coverage and What Coverage Should be Used
+The current NGS platforms available on the market, although very accurate, are still prone to error. Even at accuracies of 99% and greater, a sequence generated may contain incorrect nucleotides. This means that if a machine’s accuracy is 99%, one base pair is read incorrectly out of 100 base pairs; since NGS platforms generate high amounts of output, these errors can add up quickly. The way to circumvent NGS platform limitations is to sequence nucleotides multiple times. The number of times a nucleotide is sequenced is referred to as “coverage”, or “depth”. Coverage may also be used to refer to the percentage of target bases that have been sequenced a specific number of times.
+
+Coverage will vary depending on the type of NGS and the research application. More coverage tends to be used when in search for a variant that is less common (<1%) in a sample. An example is the detection of cancer mutations in tumour DNA circulating in the plasma of cancer patients. However, the appropriate coverage for an experiment is determined on a case-by-case basis. The coverage also varies depending on the NGS type (i.e. Whole Genome Sequencing). For instance, whole genome sequencing generally requires approximately 30x coverage, as this will detect 98% of heterozygous single nucleotide variants identified in a microarray. There is a way to compute coverage, as shown in the Lander-Waterman equation below.
+<p align="center">
+C = LN/G
+<\p>
+
+    C = coverage
+    G = haploid genome length (in nucleotides)
+    L = read length (in nucleotides)
+    N = number of reads
+
+More information about coverage choosing can be found on [genohub](https://genohub.com/recommended-sequencing-coverage-by-application/)
+
+#### Library Preparation
+Before a sample can be sequenced, it must be prepared into a sample library from genomic DNA or total RNA. A library is a collection of randomly sized DNA fragments that represent the sample input. However, depending on the type of applications, different library preparation steps are taken. Prior to sequencing, the sample library must be validated quantitatively and qualitatively. This is performed to verify if there is a sufficient amount of good quality DNA in the prepared library. Both quality and quantity play important roles in generating data. The consequence of having either more or less DNA than the optimal amount set by the library protocol is that the sequencing reaction runs less efficiently. This generates low quality data through problems including read problems from flow cell saturation, or reduced coverage because of insufficient DNA. In terms of quality, a good quality library is one that has a diverse set of DNA fragments with minimal duplicate fragments. This is important because during PCR amplification of some sample library preparation protocols, duplicates of fragments will be generated. The consequence of duplicate fragments is that the sequencing reaction will be biased towards these fragments.
+
+qPCR is a method of quantifying a sample library before sequencing. It is ideal when there is an insufficient amount available for fluorometric quantification, commonly due to no PCR amplification. It is also a more sensitive way, relative to Qubit, to quantify the adapter-ligated fragments in a sample. qPCR selectively amplifies such fragments, so it avoids the inaccuracies of Qubit that result from being unable to distinguish between fragments which can and cannot be sequenced. The only drawback to this procedure is that it is very time-consuming.
+
+Qubit is an alternative to qPCR for quantifying a sample library. Relative to qPCR, it provides results faster; however, it is not applicable for cases where there is no PCR enrichment as it is less sensitive than qPCR and requires more sample. Quantification is performed by illuminating and detecting dyes which selectively bind to DNA or RNA. First, a standard must be measured with the appropriate assay. The sample, which may be diluted, is then mixed with the appropriate dye before being inserted into the machine.
+
+## Data Analysis
+
 
