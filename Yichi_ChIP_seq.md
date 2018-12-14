@@ -16,9 +16,7 @@
         - [Coverage and What Coverage Should be Used](#coverage-and-what-coverage-should-be-used)
         - [Library Preparation](#library-preparation)
 - [Data Analysis](#data-analysis)
-    - [Normalization](#normalization)
-    - [Mapping](#mapping)
-- [Referenes](#referenes)
+- [References](#references)
 
 ## Biological Background
 
@@ -76,8 +74,7 @@ The current NGS platforms available on the market, although very accurate, are s
 
 Coverage will vary depending on the type of NGS and the research application. More coverage tends to be used when in search for a variant that is less common (<1%) in a sample. An example is the detection of cancer mutations in tumour DNA circulating in the plasma of cancer patients. However, the appropriate coverage for an experiment is determined on a case-by-case basis. The coverage also varies depending on the NGS type (i.e. Whole Genome Sequencing). For instance, whole genome sequencing generally requires approximately 30x coverage, as this will detect 98% of heterozygous single nucleotide variants identified in a microarray. There is a way to compute coverage, as shown in the Lander-Waterman equation below.
 <p align="center">
-C = LN/G
-<\p>
+    C = LN/G
 
     C = coverage
     G = haploid genome length (in nucleotides)
@@ -94,5 +91,46 @@ qPCR is a method of quantifying a sample library before sequencing. It is ideal 
 Qubit is an alternative to qPCR for quantifying a sample library. Relative to qPCR, it provides results faster; however, it is not applicable for cases where there is no PCR enrichment as it is less sensitive than qPCR and requires more sample. Quantification is performed by illuminating and detecting dyes which selectively bind to DNA or RNA. First, a standard must be measured with the appropriate assay. The sample, which may be diluted, is then mixed with the appropriate dye before being inserted into the machine.
 
 ## Data Analysis
+<p align="center">
+    <img src='https://github.com/EikDS/BENG183_markdown/blob/master/Screenshot%20from%202018-12-13%2023-29-18.png' alt='missing' />
+    <figcaption>An example of treating sequencing data, provided by Endre Barta, University of Debrecen, Center for Clinic Genomics</figcaption>
+</p>
+1. Processing raw-sequencing data: Check the overall quality of the reads, sequence composition, GC bias, adaptor pollution, quality and adaptor trimming.
+<p align="center">
+    <img src='https://github.com/EikDS/BENG183_markdown/blob/master/Screenshot%20from%202018-12-14%2000-05-55.png' alt='missing' />
+    <figcaption></figcaption>
+</p>
 
+2. Align reads to the referene genome: using aligner programs and SAM file as input.
 
+3. visualization of the genomic data: A recommanded tool is [GIVE](https://www.givengine.org/data-hub.html).
+
+4. Find peaks. Many types of experiments also seek to identify locations in which sequence reads cluster into ‘regions of enrichment’, in which overlapping reads appear as peaks. For ChIP-Seq experiments, such areas represent in vivo locations where proteins of interest (e.g. modified histones or transcription factors) were associated with DNA; for transcriptome experiments, they correspond to the locations of transcribed exons.
+
+Previously, enriched regions in ChIP-Seq experiments have been identified by enumerating genome-wide profiles of extended virtual fragments based upon the aligned position of the short sequencing reads. Several unpublished software packages are available for this goal (‘Minimal ChipSeq Peak Finder’, Wold lab, Caltech, ‘Chip-Seq Data Analysis’, Illumina Inc.).
+<p>
+    <img src='https://github.com/EikDS/BENG183_markdown/blob/master/Screenshot%20from%202018-12-14%2000-18-21.png' height=400 alt='missing' />
+    <img src='https://github.com/EikDS/BENG183_markdown/blob/master/Screenshot%20from%202018-12-14%2000-18-06.png' height=400 alt='missing' align="right" />
+    <figcaption>Provided by Endre Barta, University of Debrecen, Center for Clinic Genomics</figcaption>
+</p>
+
+## References
+1. Sequencing depth and coverage: key considerations in genomic analyses. Sims, D., et al. 2, 2014, Nature Reviews Genetics, Vol. 15, pp. 121-132.
+
+2. Noninvasive identification and monitoring of cancer mutations by targeted deep sequencing of plasma DNA. Forshew, T., et al. 136, 2012, Cancer Genomics, Vol. 4.
+
+3. Library construction for next-generation sequencing: Overviews and challenges. Head, S.R., et al. 2, 2014, BioTechniques, Vol. 56, pp. 61-77.
+
+4. Immunoprecipitation Protocol. https://www.leinco.com/immunoprecipitation-protocol
+
+5. Overview of the Immunoprecipitation (IP) Technique. https://www.thermofisher.com/us/en/home/life-science/protein-biology/protein-biology-learning-center/protein-biology-resource-library/pierce-protein-methods/immunoprecipitation-ip.html
+
+6. Anthony P. Fejes, Gordon Robertson, Mikhail Bilenky, Richard Varhol, Matthew Bainbridge, Steven J. M. Jones; FindPeaks 3.1: a tool for identifying areas of enrichment from massively parallel short-read sequencing technology , Bioinformatics, Volume 24, Issue 15, 1 August 2008, Pages 1729–1730
+
+7.  Rasika Mundade, Hatice Gulcin Ozer, Han Wei, Lakshmi Prabhu & Tao Lu (2014) Role of ChIP-seq in the discovery of transcription factor binding sites, differential gene regulation mechanism, epigenetic marks and beyond, Cell Cycle, 13:18, 2847-2852, DOI: 10.4161/15384101.2014.949201 
+
+8. Ryuichiro Nakato, Katsuhiko Shirahige; Recent advances in ChIP-seq analysis: from quality management to whole-genome annotation, Briefings in Bioinformatics, Volume 18, Issue 2, 1 March 2017, Pages 279–290
+
+9. ChIP–seq and beyond: new and improved methodologies to detect and characterize protein–DNA interactions,Terrence S. Furey, Nature Reviews Genetics volume 13, pages 840–852 (2012)
+
+10. ChIP-Seq: technical considerations for obtaining high-quality data, Benjamin L Kidder, Gangqing Hu & Keji Zhao, Nature Immunology volume 12, pages 918–922 (2011)
